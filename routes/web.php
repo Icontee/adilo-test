@@ -20,7 +20,6 @@ use Inertia\Inertia;
 Route::get('/', function () { return Inertia::render('Welcome', [ 'videos' => Video::inRandomOrder()->get() ]); })->name('home');
 Route::get('/add-video', function () {return Inertia::render('AddVideo'); })->name('addVideo');
 Route::get('/delete-video', function () { return Inertia::render('DeleteVideo', [ 'videos' => Video::all() ]); })->name('deleteVideo');
-Route::get('/login', function () {return Inertia::render('Login'); })->name('Login');
 
 
 Route::get('/videos/{id}', [\App\Http\Controllers\VideosController::class, 'show'])->name('videos.show');
