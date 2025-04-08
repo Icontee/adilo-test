@@ -20,20 +20,22 @@ use Inertia\Inertia;
 Route::get('/', function () { return Inertia::render('Welcome', [ 'videos' => Video::inRandomOrder()->get() ]); })->name('home');
 Route::get('/add-video', function () {return Inertia::render('AddVideo'); })->name('addVideo');
 Route::get('/delete-video', function () { return Inertia::render('DeleteVideo', [ 'videos' => Video::all() ]); })->name('deleteVideo');
+Route::get('/login', function () {return Inertia::render('Login'); })->name('Login');
+
 
 Route::get('/videos/{id}', [\App\Http\Controllers\VideosController::class, 'show'])->name('videos.show');
 Route::post('/videos', [\App\Http\Controllers\VideosController::class, 'store'])->name('videos.store');
 Route::delete('/videos/{id}', [\App\Http\Controllers\VideosController::class, 'destroy'])->name('videos.destroy');
 
 
-// Route::get('/dashboard', function () {
-//     return Inertia::render('Dashboard');
-// })->middleware(['auth', 'verified'])->name('dashboard');
+ Route::get('/dashboard', function () {
+   return Inertia::render('Dashboard');
+ })->middleware(['auth', 'verified'])->name('dashboard');
 
-// Route::middleware('auth')->group(function () {
-//     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-//     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-//     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-// });
+ Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+ });
 
 require __DIR__.'/auth.php';
